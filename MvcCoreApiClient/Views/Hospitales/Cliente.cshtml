@@ -1,0 +1,38 @@
+﻿<h1>Api Hospitales Cliente</h1>
+
+@section Scripts{
+    <script>
+        $(document).ready(function (){
+            var urlApi = "https://apinetcorehospitalesrazvan2024.azurewebsites.net";
+            var request = "/api/hospitales";
+            $.ajax({
+                url: urlApi + request,
+                method: "GET",
+                success: function (data) {
+                    var html = "";
+                    $.each(data, function (index, hospital) {
+                        html += "<tr>";
+                        html += "<td>" + hospital.nombre + "</td>"
+                        html += "<td>" + hospital.direccion + "</td>"
+                        html += "<td>" + hospital.telefono + "</td>"
+                        html += "<td>" + hospital.camas + "</td>"
+                        html += "</tr>";
+                    })
+                    $("#tablahospitales tbody").html(html);
+                }
+            })
+        })
+    </script>
+}
+
+<table class="table table-bordered table-active" id="tablahospitales">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Camas</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>

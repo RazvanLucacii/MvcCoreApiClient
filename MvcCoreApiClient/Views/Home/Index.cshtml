@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#botonloadpersonas").click(function () {
+                var url = "https://apicorepersonasrazvan2024.azurewebsites.net/api/personas";
+                $.ajax({
+                    url: url,
+                    method: "GET",
+                    success: function (data) {
+                        var html = "";
+                        $.each(data, function (index, persona){
+                            html += "<tr>";
+                            html += "<td>" + persona.idPersona + "</td>"
+                            html += "<td>" + persona.nombre + "</td>"
+                            html += "<td>" + persona.email + "</td>"
+                            html += "<td>" + persona.edad + "</td>"
+                            html += "</tr>";
+                        })
+                        $("#tablapersonas tbody").html(html);
+                    }
+                })
+            })
+        })
+    </script>
+}
+
+<div class="text-center">
+    <h1>Api Client Net Core</h1>
+    <button id="botonloadpersonas" class="btn btn-info">
+        Load Api Personas
+    </button>
+    <table class="table table-bordered" id="tablapersonas">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Edad</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
